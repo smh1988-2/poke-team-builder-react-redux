@@ -28,20 +28,28 @@ export const searchSlice = createSlice({
 });
 
 export function fetchPokemon(searchTerm) {
-    return async dispatch => {
-      dispatch(getPokemon())
-  
+  return async (dispatch) => {
+    dispatch(getPokemon());
+    if (searchTerm.length > 0) {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}/`)
-        const data = await response.json()
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${searchTerm}/`
+        );
+        const data = await response.json();
 
-        dispatch(getPokemonSuccess(data))
+        dispatch(getPokemonSuccess(data));
       } catch (error) {
-        dispatch(getPokemonFailure())
+        dispatch(getPokemonFailure());
       }
     }
-  }
+  };
+}
 
-export const { setSearchTerm, getPokemon, getPokemonSuccess, getPokemonFailure } = searchSlice.actions;
+export const {
+  setSearchTerm,
+  getPokemon,
+  getPokemonSuccess,
+  getPokemonFailure,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;

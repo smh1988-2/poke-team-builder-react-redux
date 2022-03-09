@@ -8,7 +8,6 @@ function Search() {
 
     const dispatch = useDispatch();
     const search = useSelector(state => state.search)
-    // console.log("search is: ", search)
 
     function handleSearchSubmit(e) {
         e.preventDefault();
@@ -26,7 +25,7 @@ function Search() {
             <input type="text" placeholder="Search for a Pokemon"></input>
             <button>Search</button>
         </form>
-        <p>Search term is: {search.searchTerm}</p>
+        {/* <p>Search term is: {search.searchTerm}</p> */}
     </div>
   )
 }

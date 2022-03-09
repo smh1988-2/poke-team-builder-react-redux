@@ -1,0 +1,13 @@
+// @import "~bootstrap/scss/bootstrap";
+
+$myColor: red;
+
+$body-bg: #cccccc;
+$body-color: #999999;
+$font-family-sans-serif: "Poppins", sans-serif;
+
+p {
+  color: $myColor;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";

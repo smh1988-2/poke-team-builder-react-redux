@@ -4,9 +4,12 @@ This is an updated version of my [very first coding project](https://github.com/
 
 This version uses a React frontend, with Redux for state management and a Ruby on Rails backend (coming soon!).
 
+Pokemon data is from [PokeAPI](https://pokeapi.co/).
+
 ## Learning goals
 1. Learn and implement Redux in a real web app.
 2. Build a mobile-first web app (the OG is **not** mobile-friendly).
+3. Use SASS to style the app.
 
 ## User stories
 1. I want to search the database for a Pokemon.
