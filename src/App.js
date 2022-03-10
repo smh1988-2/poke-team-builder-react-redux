@@ -1,6 +1,7 @@
 import Search from './components/Search';
 import SearchResults from './components/SearchResults';
 import Header from './components/Header';
+import MyTeam from './components/MyTeam';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Header />
       <Search />
       <SearchResults />
+      <MyTeam />
     </div>
   );
 }

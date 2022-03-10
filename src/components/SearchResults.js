@@ -1,14 +1,21 @@
 import React from "react";
 import "../styles/poke-styles.scss";
-
+import { addToTeam } from "../slices/teamSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function SearchResults() {
   const dispatch = useDispatch();
   const result = useSelector((state) => state.search.pokemon);
   const description = useSelector((state) => state.search.description);
-  console.log("result is: ", result);
+//   console.log("result is: ", result);
   // console.log("description is: ", description);
+
+  function handleAddToTeam() {
+      console.log("current pokemon is: ", result)
+      console.log("add to team clicked")
+      dispatch(addToTeam(result))
+
+  }
 
   return (
     <div>
@@ -22,15 +29,17 @@ function SearchResults() {
             />
             <div className="card-body">
               <h5 className="card-title">{result.name}</h5>
-              <p className="card-text">
+              <div className="card-text">
                 {description.flavor_text_entries
                   ? description.flavor_text_entries[0].flavor_text
                   : null}
                   <br />
                   <ul>
                   {result.types.map((type) => <li>{type.type.name}</li>)}
+                  {result.abilities.map((ability) => <li>{ability.ability.name}</li>)}
                   </ul>
-              </p>
+                  <button onClick={handleAddToTeam}>Add to team</button>
+              </div>
             </div>
           </div>
         </div>
