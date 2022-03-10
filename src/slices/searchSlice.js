@@ -7,6 +7,7 @@ export const searchSlice = createSlice({
     loading: false,
     hasErrors: false,
     pokemon: [],
+    description: {},
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -20,6 +21,9 @@ export const searchSlice = createSlice({
       state.loading = false;
       state.hasErrors = false;
     },
+    getPokemonDescription: (state, { payload }) => {
+      state.description = payload;
+    },
     getPokemonFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
@@ -27,17 +31,21 @@ export const searchSlice = createSlice({
   },
 });
 
-export function fetchPokemon(searchTerm) {
+export function fetchPokemon(searchTerm, pokemon) {
   return async (dispatch) => {
     dispatch(getPokemon());
     if (searchTerm.length > 0) {
       try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${searchTerm}/`
-        );
-        const data = await response.json();
-
-        dispatch(getPokemonSuccess(data));
+        fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}/`)
+          .then((r) => r.json())
+          .then((data) => {
+            dispatch(getPokemonSuccess(data));
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${data.id}/`)
+              .then((r) => r.json())
+              .then((description) =>
+                dispatch(getPokemonDescription(description))
+              );
+          });
       } catch (error) {
         dispatch(getPokemonFailure());
       }
@@ -48,6 +56,7 @@ export function fetchPokemon(searchTerm) {
 export const {
   setSearchTerm,
   getPokemon,
+  getPokemonDescription,
   getPokemonSuccess,
   getPokemonFailure,
 } = searchSlice.actions;

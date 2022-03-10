@@ -2,12 +2,18 @@
 
 $myColor: red;
 
-$body-bg: #cccccc;
-$body-color: #999999;
+// $body-bg: #cccccc;
+// $body-color: #999999;
 $font-family-sans-serif: "Poppins", sans-serif;
+$primary: #000000;
 
 p {
   color: $myColor;
 }
+
+.App {
+    text-align: center;
+  }
+  
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
