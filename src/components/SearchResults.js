@@ -11,8 +11,8 @@ function SearchResults() {
   // console.log("description is: ", description);
 
   function handleAddToTeam() {
-      console.log("current pokemon is: ", result)
-      console.log("add to team clicked")
+      // console.log("current pokemon is: ", result)
+      // console.log("add to team clicked")
       dispatch(addToTeam(result))
 
   }

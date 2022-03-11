@@ -14,6 +14,11 @@ p {
 .App {
     text-align: center;
   }
+
+  .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
   
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

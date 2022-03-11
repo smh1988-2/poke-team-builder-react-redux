@@ -5,10 +5,10 @@ export const teamSlice = createSlice({
   initialState: [],
   reducers: {
     addToTeam: (state, action) => {
-        //console.log(state.team)
-        // const newState = [...state.team, action.payload]
+        if (state.length < 6) {
         state.push(action.payload)
         return state
+        }
     },
     removeFromTeam: (state, action) => {},
   },

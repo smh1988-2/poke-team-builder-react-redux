@@ -1,10 +1,12 @@
 import React from "react";
+import TeamPokemonCard from "./TeamPokemonCard";
+import Accordion from 'react-bootstrap/Accordion'
 
 import { useSelector } from "react-redux";
 
 function MyTeam() {
   const team = useSelector((state) => state.team);
-  console.log("team is: ", team);
+//   console.log("team is: ", team);
 
   return (
     <div>
@@ -12,12 +14,21 @@ function MyTeam() {
 
       {team.length > 0 ? (
         <div>
-            {team.map((pokemon) => <p>{pokemon.name}</p>)}
+          <Accordion alwaysOpen>
+            
+          {team.map((pokemon) => {
+            return (
+              <div key={pokemon.id}>
+                <TeamPokemonCard pokemon={pokemon} eventKey={pokemon.id}/>
+              </div>
+            );
+          })}
+          </Accordion>
+          
 
-         {/* MAKE TEAM CARD */}
+          {/* MAKE TEAM CARD */}
         </div>
       ) : null}
-
     </div>
   );
 }
