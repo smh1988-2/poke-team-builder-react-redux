@@ -1,25 +1,23 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
-import { useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
 
-function TeamPokemonCard({ pokemon, eventKey }) {
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromTeam } from "../slices/teamSlice";
+
+function TeamPokemonCard({ pokemon, teamMemberId }) {
+  const typeEffectiveness = useSelector(
+    (state) => state.search.typeEffectiveness
+  );
+  const dispatch = useDispatch();
+ 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  const type1 = pokemon.types[0].type.name
-  const type2 = pokemon.types[1].type.name
-  
-  console.log(type1, type2)
-
-  const typeEffectiveness = useSelector(
-    (state) => state.search.typeEffectiveness
-  );
-  console.log(typeEffectiveness);
-
   return (
     <div>
-      <Accordion.Item eventKey={eventKey}>
+      <Accordion.Item eventKey={teamMemberId}>
         <Accordion.Header>
           <img
             className=""
@@ -27,19 +25,14 @@ function TeamPokemonCard({ pokemon, eventKey }) {
             alt={pokemon.name}
             height="100px"
           />
-          {capitalizeFirstLetter(pokemon.name)}
+          <h3>{capitalizeFirstLetter(pokemon.name)}</h3>{" "}
         </Accordion.Header>
         <Accordion.Body>
           {pokemon.types.map((type) => (
             <li key={type.type.name}>{type.type.name}</li>
           ))}
+          <Button onClick={() => dispatch(removeFromTeam(teamMemberId))}>REMOVE</Button>
 
-          { Object.keys(typeEffectiveness).length ? "we have types" : "no types" }
-          {/* {typeEffectiveness
-            .filter((type) => type === pokemon.types.name)
-            .map((type) => {
-              console.log("matching type for team members? ", type);
-            })} */}
         </Accordion.Body>
       </Accordion.Item>
     </div>

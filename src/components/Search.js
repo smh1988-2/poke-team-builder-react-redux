@@ -17,7 +17,6 @@ function Search() {
     }
 
     useEffect(() => {
-        // console.log("fetching pokemon")
         dispatch(fetchPokemon(search.searchTerm))
       }, [search.searchTerm])
 

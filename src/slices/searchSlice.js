@@ -8,7 +8,8 @@ export const searchSlice = createSlice({
     hasErrors: false,
     pokemon: [],
     description: {},
-    typeEffectiveness: {},
+    typeEffectiveness: [],
+    team: [],
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -23,9 +24,9 @@ export const searchSlice = createSlice({
       state.hasErrors = false;
     },
     getPokemonTypeEffectiveness: (state, action) => {
-      //console.log("action payload is: ",action.payload)
-      // add logic to not add duplicate types!!!
-      state.typeEffectiveness = {...state.typeEffectiveness, [action.payload.name] :action.payload};
+      state.pokemon[state.pokemon.length - 1] = {
+        ...(state.pokemon["type_effectiveness"] = action.payload),
+      };
     },
     getPokemonDescription: (state, { payload }) => {
       state.description = payload;
@@ -37,28 +38,32 @@ export const searchSlice = createSlice({
   },
 });
 
-export function fetchPokemon(searchTerm, pokemon) {
+export function fetchPokemon(searchTerm) {
   return async (dispatch) => {
     dispatch(getPokemon());
     if (searchTerm.length > 0) {
       try {
+        // get the basic pokemon info and add it to the store
         fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}/`)
           .then((r) => r.json())
           .then((data) => {
             dispatch(getPokemonSuccess(data));
-            //console.log("current pokemon type(s): ", data.types[0].type.url)
 
-
-            for (let i=0;i<data.types.length;i++) {
+            // loop through the types (1 or 2) and add them to an array, used in action.payload and appended to the most recent pokemon
+            let typeEffectivenessArray = [];
+            for (let i = 0; i < data.types.length; i++) {
               fetch(`${data.types[i].type.url}`)
-              .then((r) => r.json())
-              .then((typeEffectiveness) => {
-                dispatch(getPokemonTypeEffectiveness(typeEffectiveness));
-                //console.log("type effectiveness is: ", typeEffectiveness);
-              })
+                .then((r) => r.json())
+                .then((typeEffectiveness) => {
+                  typeEffectivenessArray = [
+                    ...typeEffectivenessArray,
+                    typeEffectiveness,
+                  ];
+                  dispatch(getPokemonTypeEffectiveness(typeEffectivenessArray));
+                });
             }
-            
 
+            //grab the description and add it to the store
             fetch(`https://pokeapi.co/api/v2/pokemon-species/${data.id}/`)
               .then((r) => r.json())
               .then((description) => {

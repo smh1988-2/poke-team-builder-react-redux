@@ -7,14 +7,9 @@ function SearchResults() {
   const dispatch = useDispatch();
   const result = useSelector((state) => state.search.pokemon);
   const description = useSelector((state) => state.search.description);
-//   console.log("result is: ", result);
-  // console.log("description is: ", description);
 
   function handleAddToTeam() {
-      // console.log("current pokemon is: ", result)
-      // console.log("add to team clicked")
       dispatch(addToTeam(result))
-
   }
 
   return (

@@ -5,12 +5,17 @@ export const teamSlice = createSlice({
   initialState: [],
   reducers: {
     addToTeam: (state, action) => {
-        if (state.length < 6) {
-        state.push(action.payload)
-        return state
-        }
+      if (state.length < 6) {
+        state.push(action.payload);
+        return state;
+      }
     },
-    removeFromTeam: (state, action) => {},
+    removeFromTeam: (state, action) => {
+      return [
+        ...state.slice(0, action.payload),
+        ...state.slice(action.payload + 1),
+      ];
+    },
   },
 });
 
