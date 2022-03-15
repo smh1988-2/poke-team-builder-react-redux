@@ -13,6 +13,7 @@ export const searchSlice = createSlice({
   },
   reducers: {
     setSearchTerm: (state, action) => {
+      state.pokemon = []
       state.searchTerm = action.payload;
     },
     getPokemon: (state) => {
@@ -45,8 +46,12 @@ export function fetchPokemon(searchTerm) {
       try {
         // get the basic pokemon info and add it to the store
         fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}/`)
-          .then((r) => r.json())
+          .then((response) => {
+            if (response.ok) {
+               
+          response.json()
           .then((data) => {
+            console.log("data",data)
             dispatch(getPokemonSuccess(data));
 
             // loop through the types (1 or 2) and add them to an array, used in action.payload and appended to the most recent pokemon
@@ -70,7 +75,13 @@ export function fetchPokemon(searchTerm) {
                 dispatch(getPokemonDescription(description));
               });
           });
-      } catch (error) {
+            } else {
+              dispatch(getPokemonFailure());
+            }
+          }
+          
+         
+          )} catch (error) {
         dispatch(getPokemonFailure());
       }
     }

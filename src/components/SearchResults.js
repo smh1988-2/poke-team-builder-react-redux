@@ -9,9 +9,11 @@ import {
 function SearchResults() {
   const dispatch = useDispatch();
   const result = useSelector((state) => state.search.pokemon);
+  const search = useSelector((state) => state.search);
   const description = useSelector((state) => state.search.description);
+  const team = useSelector((state) => state.team);
 
-  //console.log(result);
+  // console.log("team is ", team);
 
   return (
     <div className="container">
@@ -20,7 +22,7 @@ function SearchResults() {
         <div className="col-10">
           {result.name ? (
             <div>
-              <div className="card mx-auto" style={{ width: "20rem" }}>
+              <div className="card mx-auto animated animatedFadeInUp fadeInUp" style={{ width: "20rem" }}>
                 <h3 className="card-title">
                   {capitalizeFirstLetter(result.name)}
                 </h3>
@@ -63,15 +65,36 @@ function SearchResults() {
                     <br />
                   </div>
                 </div>
-                <button
-                  className="text-center add-to-team"
-                  onClick={() => dispatch(addToTeam(result))}
-                >
-                  Add to team
-                </button>
+
+                {team.length < 6 ? (
+                  <button
+                    className="text-center add-to-team"
+                    onClick={() => dispatch(addToTeam(result))}
+                  >
+                    Add to team
+                  </button>
+                ) : (
+                  <button
+                    className="text-center add-to-team-disabled"
+                    disabled
+                    onClick={() => dispatch(addToTeam(result))}
+                  >
+                    Add to team
+                  </button>
+                )}
               </div>
             </div>
-          ) : <p>Sorry, we couldn't find that Pokemon. Try searching again?</p>}
+          ) : (
+            <>
+              {search.hasErrors ? (
+                <p>
+                  Sorry, we couldn't find that Pokemon. Try searching again?
+                </p>
+              ) : null}
+
+              {/* <p>Sorry, we couldn't find that Pokemon. Try searching again?</p> */}
+            </>
+          )}
         </div>
         <div className="col"></div>
       </div>

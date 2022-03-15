@@ -55,7 +55,7 @@ function TeamPokemonCard({ pokemon, teamMemberId }) {
   ];
 
   return (
-    <div>
+    <div className="animated animatedFadeInUp fadeInUp">
       <Accordion.Item eventKey={teamMemberId}>
         <Accordion.Header>
           <img
@@ -78,9 +78,9 @@ function TeamPokemonCard({ pokemon, teamMemberId }) {
           </div>
         </Accordion.Header>
         <Accordion.Body>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm">
+          <div className="container">
+            <div className="row">
+              <div className="col-sm">
                 <p>Use {capitalizeFirstLetter(pokemon.name)} when fighting:</p>
                 {uniqueWeakAgainstArray.map((damage) => (
                   <img
@@ -91,7 +91,9 @@ function TeamPokemonCard({ pokemon, teamMemberId }) {
                   />
                 ))}
               </div>
-              <div class="col-sm">
+              </div>
+              <div className="row">
+              <div className="col-sm">
                 <p>Be careful when fighting:</p>
                 {uniqueStrongAgainstArray.map((damage) => (
                   <img
@@ -105,10 +107,10 @@ function TeamPokemonCard({ pokemon, teamMemberId }) {
             </div>
           </div>
 
-          <br />
+       
 
           <button
-            className="text-center add-to-team"
+            className="text-center remove-from-team"
             onClick={() => dispatch(removeFromTeam(teamMemberId))}
           >
             Remove from team
