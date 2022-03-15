@@ -21,7 +21,7 @@ function Search() {
     <div className="container search-bar">
       <div className="row">
         <div className="col"></div>
-        <div className="col-10">
+        <div className="col-8">
           <form onSubmit={(e) => handleSearchSubmit(e)}>
             <div className="input-group mb-3">
               <input

@@ -6,9 +6,9 @@ $pokemonLightBlue: #5db9ff;
 $pokemonDarkBlue:	#363b81;
 
 $body-bg: #fff;
-//$body-color: #999999;
 $body-font-size: 0.5rem;
 $font-family-sans-serif: "Helvetica", sans-serif;
+$gutter-x: 0rem;
 
 $primary: $pokemonLightBlue;
 
@@ -139,6 +139,22 @@ $primary: $pokemonLightBlue;
   margin-bottom: 0px;
 }
 
+// Global styles
+
+.row {
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+.col {
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+.col-10 {
+  width:100%
+}
+
 .App {
   text-align: center;
 }
@@ -149,17 +165,7 @@ $primary: $pokemonLightBlue;
 }
 
 
-
-
-.hero-header-animated {
-  display: inline-block;
-  animation: fadeIn linear 2s;
-  -webkit-animation: fadeIn linear 2s;
-  -moz-animation: fadeIn linear 2s;
-  -o-animation: fadeIn linear 2s;
-  -ms-animation: fadeIn linear 2s;
-}
-
+// Animation for search card and team members
 @keyframes fadeIn {
   0% {
     opacity: 0;
