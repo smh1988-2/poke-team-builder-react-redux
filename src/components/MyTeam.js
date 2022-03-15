@@ -6,14 +6,18 @@ import { useSelector } from "react-redux";
 
 function MyTeam() {
   const team = useSelector((state) => state.team);
-  //   console.log("team is: ", team);
+    //console.log("team is: ", team[0].type_effectiveness[0].damage_relations);
 
   return (
     <div>
-      <h1>My Team</h1>
-
-      {team.length > 0 ? (
+      <div className="container">
+      <div className="row">
+        <div className="col"></div>
+        <div className="col-10">
+          
+        {team.length > 0 ? (
         <div>
+          {/* <h1>My Team</h1> */}
           <Accordion alwaysOpen>
             {team.map((teamMember) => {
               return (
@@ -26,8 +30,16 @@ function MyTeam() {
               );
             })}
           </Accordion>
+          <br />
         </div>
       ) : null}
+
+        </div>
+        <div className="col"></div>
+      </div>
+    </div>
+
+      
     </div>
   );
 }
