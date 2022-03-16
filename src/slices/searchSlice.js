@@ -8,8 +8,6 @@ export const searchSlice = createSlice({
     hasErrors: false,
     pokemon: [],
     description: {},
-    typeEffectiveness: [],
-    team: [],
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -47,13 +45,11 @@ export function fetchPokemon(searchTerm) {
         // get the basic pokemon info and add it to the store
         fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}/`)
           .then((response) => {
-            if (response.ok) {
-               
+            if (response.ok) {     
           response.json()
           .then((data) => {
             console.log("data",data)
             dispatch(getPokemonSuccess(data));
-
             // loop through the types (1 or 2) and add them to an array, used in action.payload and appended to the most recent pokemon
             let typeEffectivenessArray = [];
             for (let i = 0; i < data.types.length; i++) {
@@ -67,7 +63,6 @@ export function fetchPokemon(searchTerm) {
                   dispatch(getPokemonTypeEffectiveness(typeEffectivenessArray));
                 });
             }
-
             //grab the description and add it to the store
             fetch(`https://pokeapi.co/api/v2/pokemon-species/${data.id}/`)
               .then((r) => r.json())
@@ -79,8 +74,6 @@ export function fetchPokemon(searchTerm) {
               dispatch(getPokemonFailure());
             }
           }
-          
-         
           )} catch (error) {
         dispatch(getPokemonFailure());
       }

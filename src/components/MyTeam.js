@@ -8,6 +8,9 @@ function MyTeam() {
   const team = useSelector((state) => state.team);
     //console.log("team is: ", team[0].type_effectiveness[0].damage_relations);
 
+  //  const localTeam = localStorage.getItem("persistantState")
+  //  console.log(localTeam["team"])
+   
   return (
     <div>
       <div className="container">
