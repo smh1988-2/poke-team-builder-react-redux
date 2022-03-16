@@ -12078,6 +12078,20 @@ fieldset:disabled .btn {
   margin-bottom: 0px;
 }
 
+.row {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.col {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.col-10 {
+  width: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -12089,15 +12103,6 @@ fieldset:disabled .btn {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-}
-
-.hero-header-animated {
-  display: inline-block;
-  animation: fadeIn linear 2s;
-  -webkit-animation: fadeIn linear 2s;
-  -moz-animation: fadeIn linear 2s;
-  -o-animation: fadeIn linear 2s;
-  -ms-animation: fadeIn linear 2s;
 }
 
 @keyframes fadeIn {
